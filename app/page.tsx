@@ -1,3 +1,4 @@
+import CTA from "./ui/CTA";
 import Herosection from "./ui/Herosection";
 import Navbar from "./ui/Navbar"
 import ServicePage from "./ui/ServicePage";
@@ -14,6 +15,7 @@ export default function Home() {
       </div>
       <ServicePage/>
       <Testimonial/>
+      <CTA/>
     </div>
   );
 }
