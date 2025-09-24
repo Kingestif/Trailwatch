@@ -4,10 +4,11 @@ import Navbar from "./ui/Navbar"
 export default function Home() {
   return (
     <div>
-      <div className="Landing h-screen px-50">
+      <div className="Landing h-screen px-50 flex flex-col">
         <Navbar/>
         <Herosection/>
       </div>
+      <div>hi</div>
     </div>
   );
 }

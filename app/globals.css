@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
+@theme{
+    --color-primary: #DC111F;
+}
+
 .Landing{
-    background-image: url("/land9.png");
+    background-image: url("/land10.png");
     background-size: cover;
+}
+
+html{
+    font-family:sans-serif;
 }
