@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+.Landing{
+    background-image: url("/land9.png");
+    background-size: cover;
+}
