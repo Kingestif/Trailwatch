@@ -46,3 +46,33 @@ export const StreamData: Streamers[] = [
     icon:"/starwars.png"
   }
 ]
+
+type testimonial = {
+  name:string
+  role:string
+  imageUrl:string
+  text:string
+}
+
+export const testimonialData:testimonial[] = [
+  {
+    name: "Selam Abreha",
+    role: "HR",
+    imageUrl:"/pf.png",
+    text: "Finally, a streaming site that feels fresh and intuitive. The recommendations are spot-on, and the trailers play instantly",
+  },
+
+  {
+    name:"Bisrat Zinabu",
+    role:"Student",
+    imageUrl:"/pf2.png",
+    text:"The dark, cinematic design makes it feel like I’m already at the theater. It’s my go-to place to watch new releases."
+  },
+  
+  {
+    name: "Daniel T.",
+    role: "Movie Enthusiast",
+    imageUrl: "/pf1.png",
+    text: "I love how clean and fast the interface is. I discovered so many hidden gems I’d never seen on other platforms."
+  }
+]
