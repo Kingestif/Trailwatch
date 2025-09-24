@@ -1,6 +1,6 @@
 export default function Herosection() {
   return (
-    <div className="HeroText text-white flex flex-col gap-15 justify-center flex-1 px-10">
+    <div className="HeroText text-white flex flex-col gap-15 justify-center flex-1 ">
        <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl flex flex-col gap-3">
             <div>Your Universe</div>
             <div>Of Movies &</div>
