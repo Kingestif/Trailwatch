@@ -3,7 +3,7 @@ import { ServiceData } from "../lib/Placeholder";
 export default function ServicePage() {
   return (
     <div className="flex flex-col gap-15 text-white px-50 py-20 ">
-        <div className="text-center text-4xl">Services</div>
+        <div className="text-center text-4xl">What We Offer</div>
         <div className="flex justify-around ">
             {ServiceData.map(item=>(
                 <div key={item.title} className="text-center flex flex-col gap-3">
