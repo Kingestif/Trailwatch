@@ -9,7 +9,7 @@ import Testimonial from "./ui/landing/Testimonial";
 export default function Home() {
   return (
     <div className="bg-black text-white">
-      <div className="Landing h-screen px-50 flex flex-col">
+      <div className="Landing h-screen px-50 max-sm:px-10 flex flex-col max-sm:h-fit max-sm:gap-5">
         <Navbar/>
         <Herosection/>
         <Streamers/>
