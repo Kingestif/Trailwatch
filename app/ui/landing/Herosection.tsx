@@ -9,7 +9,7 @@ export default function Herosection() {
 
         <div className="text-xl text-gray-400 max-sm:text-center max-sm:text-lg">Discover trending films, latest trailers, and timeless classics.</div>
 
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-5 items-center max-sm:m-auto">
             <button className="bg-primary px-6 py-3 text-white rounded-md font-bold text-lg max-sm:px-3 max-sm:py-2 max-sm:text-sm">Start Watching</button>
             <button className="font-medium text-lg max-sm:text-sm">Explore Movies</button>
         </div>
