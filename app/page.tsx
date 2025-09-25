@@ -1,4 +1,5 @@
 import CTA from "./ui/landing/CTA";
+import Footer from "./ui/landing/Footer";
 import Herosection from "./ui/landing/Herosection";
 import Navbar from "./ui/landing/Navbar"
 import ServicePage from "./ui/landing/ServicePage";
@@ -16,6 +17,7 @@ export default function Home() {
       <ServicePage/>
       <Testimonial/>
       <CTA/>
+      <Footer/>
     </div>
   );
 }

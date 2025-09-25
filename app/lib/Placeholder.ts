@@ -76,3 +76,53 @@ export const testimonialData:testimonial[] = [
     text: "I love how clean and fast the interface is. I discovered so many hidden gems I’d never seen on other platforms."
   }
 ]
+
+type socials = {
+  imageUrl:string,
+  url:string
+
+}
+
+export const socialLinks:socials[] = [
+  {
+    imageUrl: "/github1.png",
+    url:"https://github.com/Kingestif"
+  },
+  {
+    imageUrl: "/telegram1.png",
+    url:"https://t.me/estifo_z"
+  },
+  {
+    imageUrl: "/linkedin1.png",
+    url:"https://www.linkedin.com/in/estif/"
+  },
+  {
+    imageUrl: "/medium.png",
+    url:"https://medium.com/@estifanos"
+
+  },
+  {
+    imageUrl: "/dribble.png",
+    url: "https://dribbble.com/estif_z"
+  }
+]
+
+type contacts = {
+  icon:string,
+  detail:string
+}
+
+export const contactData:contacts[] = [
+  {
+    icon: "/call.png",
+    detail:"+251-942-143-127"
+  },
+  {
+    icon: "/email.png",
+    detail:"kingestiff@gmail.com"
+  },
+  {
+    icon: "/location.png",
+    detail:"Addis Ababa, Ethiopia"
+  }
+]
