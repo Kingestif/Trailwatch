@@ -1,9 +1,9 @@
-import CTA from "./ui/CTA";
-import Herosection from "./ui/Herosection";
-import Navbar from "./ui/Navbar"
-import ServicePage from "./ui/ServicePage";
-import Streamers from "./ui/Streamers";
-import Testimonial from "./ui/Testimonial";
+import CTA from "./ui/landing/CTA";
+import Herosection from "./ui/landing/Herosection";
+import Navbar from "./ui/landing/Navbar"
+import ServicePage from "./ui/landing/ServicePage";
+import Streamers from "./ui/landing/Streamers";
+import Testimonial from "./ui/landing/Testimonial";
 
 export default function Home() {
   return (

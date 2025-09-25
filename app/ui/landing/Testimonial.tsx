@@ -1,4 +1,4 @@
-import { testimonialData } from "../lib/Placeholder";
+import { testimonialData } from "../../lib/Placeholder";
 
 export default function Testimonial() {
   return (

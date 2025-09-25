@@ -1,4 +1,4 @@
-import { StreamData } from "../lib/Placeholder";
+import { StreamData } from "../../lib/Placeholder";
 
 export default function Streamers() {
   return (

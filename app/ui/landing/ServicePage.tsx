@@ -1,4 +1,4 @@
-import { ServiceData } from "../lib/Placeholder";
+import { ServiceData } from "../../lib/Placeholder";
 
 export default function ServicePage() {
   return (
