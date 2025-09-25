@@ -7,11 +7,11 @@ export default function ServicePage() {
         <div className="flex justify-around max-sm:flex-wrap max-sm:gap-10">
             {ServiceData.map(item=>(
                 <div key={item.title} className="text-center flex flex-col gap-3 max-sm:gap-2">
-                    <div className="w-100 h-100 max-sm:w-50 max-sm:h-50 ">
+                    <div className="w-100 h-100 max-sm:w-60 max-sm:h-60 ">
                         <img className="w-full h-full object-cover rounded-4xl" src={item.image} alt="" />
                     </div>
                     <div className="text-2xl font-semibold max-sm:text-xl">{item.title}</div>
-                    <div className="text-xl w-100 text-gray-500 max-sm:w-50 max-sm:text-sm">{item.description}</div>
+                    <div className="text-xl w-100 text-gray-500 max-sm:w-60 max-sm:text-sm">{item.description}</div>
                 </div>
             ))}
         </div>
