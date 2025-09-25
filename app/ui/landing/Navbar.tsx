@@ -1,7 +1,7 @@
 export default function Navbar() {
   return (
     <div className="Navbar text-white flex justify-between text-2xl py-3 bg-black fixed w-full left-0 px-50">
-      <div>Trailwatch</div>
+      <div className="text-3xl font-semibold">Trailwatch</div>
       <div className="flex gap-10">
         <div>Search</div>
         <div>Home</div>
