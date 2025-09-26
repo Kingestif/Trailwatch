@@ -131,65 +131,76 @@ type MovieGallary = {
   name: string
   description: string
   rating: string
-  year:string
+  year:string,
+  poster:string
 }
 
 export const MovieGallaryData: MovieGallary[] = [
   {
+    poster:"/grootcrop.png",
     name: "Galactic Odyssey",
     description: "A crew of astronauts embark on a perilous journey across the stars to save humanity from an impending cosmic threat.",
     rating: "8.7",
     year:"2015"
   },
   {
+    poster:"/grootcrop.png",
     name: "Nebula Nights",
     description: "In a distant galaxy, a young explorer discovers secrets of a forgotten civilization hidden among the stars.",
     rating: "7.9",
     year:"2017"
   },
   {
+    poster:"/grootcrop.png",
     name: "Stellar Horizons",
     description: "An interstellar adventure filled with action, romance, and the challenges of space travel.",
     rating: "8.3",
     year:"2021"
   },
   {
+    poster:"/grootcrop.png",
     name: "Cosmic Drift",
     description: "A lone pilot must navigate through uncharted galaxies to prevent a catastrophic intergalactic war.",
     rating: "8.0",
     year:"2024"
   },
   {
+    poster:"/grootcrop.png",
     name: "Orbit Rebels",
     description: "A band of space outlaws takes on a corrupt galactic empire, facing danger and betrayal at every turn.",
     rating: "7.5",
     year:"1994"
   },
   {
+    poster:"/grootcrop.png",
     name: "Astro Legends",
     description: "Legends of the cosmos unfold as heroes rise to battle interstellar threats beyond imagination.",
     rating: "8.2",
     year:"2000"
   },
   {
+    poster:"/grootcrop.png",
     name: "Meteor Strike",
     description: "When a massive meteor threatens Earth, a team of scientists and astronauts must stop it before it’s too late.",
     rating: "7.8",
     year:"2015"
   },
   {
+    poster:"/grootcrop.png",
     name: "Quantum Leap",
     description: "A daring experiment in space-time travel goes wrong, sending a scientist across multiple dimensions.",
     rating: "8.1",
     year:"2025"
   },
   {
+    poster:"/grootcrop.png",
     name: "Supernova Rising",
     description: "A young pilot must confront her past and save her crew as a supernova threatens their sector of the galaxy.",
     rating: "8.4",
     year:"1999"
   },
   {
+    poster:"/grootcrop.png",
     name: "Eclipse of Infinity",
     description: "A mysterious signal from a distant star leads an expedition to uncover the secrets of an ancient alien race.",
     rating: "7.9",
