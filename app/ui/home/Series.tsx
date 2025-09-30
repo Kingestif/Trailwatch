@@ -11,7 +11,7 @@ export default function Series() {
                 {/* <img src={movie.poster} className="w-50 h-60" alt="Movie Poster" /> */}
                 <div className="flex flex-col">
                   <div className="text-xl">{movie.name}</div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-gray-300">
                     <div>{movie.year}</div>
                     <div className="flex items-center gap-1">
                       <img src="/star.png" className="h-5 w-5" alt="Rating"/>

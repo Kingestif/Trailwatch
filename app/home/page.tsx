@@ -5,7 +5,7 @@ import TopBanner from "../ui/home/topBanner";
 
 export default function page() {
   return (
-    <div className="bg-black text-white px-50 flex flex-col gap-10">
+    <div className="bg-black text-gray-100 px-50 flex flex-col gap-10">
       <TopBanner/>
       <Movies/>
       <Series/>
