@@ -1,6 +1,6 @@
 export default function TopBanner() {
   return (
-    <div className="AD bg-gray-500 h-100 pt-20 flex flex-col gap-5">
+    <div className="AD bg-[url(/backdrop.webp)] bg-cover bg-center  h-100 pt-20 flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <div className="text-5xl font-semibold">Movie Name</div>
           <div className="flex gap-2 font-semibold items-center">
