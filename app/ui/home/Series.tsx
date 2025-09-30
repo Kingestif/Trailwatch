@@ -3,7 +3,7 @@ import { MovieGallaryData } from "@/app/lib/Placeholder";
 export default function Series() {
     return (
         <div className="flex flex-col gap-5">
-          <div className="text-3xl font-semibold">Trending Series</div>
+          <div className="text-3xl font-semibold">Movies</div>
           <div className="flex gap-5 overflow-x-auto hide-scrollbar">
             {MovieGallaryData.map(movie=>(
               <div key={movie.name} className="flex flex-col gap-2 font-bold">

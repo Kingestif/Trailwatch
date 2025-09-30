@@ -3,7 +3,7 @@ import { MovieGallaryData } from "@/app/lib/Placeholder";
 export default function MovieGallary() {
   return (
     <div className="flex flex-col gap-5 pb-10">
-      <div className="text-3xl font-semibold">Recommended</div>
+      <div className="text-3xl font-semibold">Popular Series</div>
       <div className="grid gap-2 grid-cols-3 gap-y-5">
         {MovieGallaryData.map(movie=>(
           <div key={movie.name} className="flex gap-2">
