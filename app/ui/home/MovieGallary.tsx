@@ -7,7 +7,13 @@ export default function MovieGallary() {
       <div className="grid gap-2 grid-cols-3 gap-y-5">
         {MovieGallaryData.map(movie=>(
           <div key={movie.name} className="flex gap-2">
-            <div className="w-30 h-40 bg-gray-500"></div>
+            <div className="w-30 h-40 rounded-lg bg-gray-500">
+              <img
+                src={movie.poster}
+                alt={movie.name}
+                className="object-cover w-full h-full"
+              />
+            </div>
             <div className="w-50 h-40 flex flex-col justify-between">
               <div className="text-xl font-bold">{movie.name}</div>
               <div className="line-clamp-3">{movie.description}</div>
