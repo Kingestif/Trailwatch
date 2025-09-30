@@ -17,7 +17,7 @@ export default function Home() {
       <ServicePage/>
       <Testimonial/>
       <CTA/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <div className="bg-[#3e3e3e] flex flex-col px-50 py-10 gap-10 max-sm:px-10">
+    <div className="bg-[#3e3e3e] flex flex-col px-50 py-10 gap-10 max-sm:px-10 text-white">
       <div className="flex justify-between">
         <div className="flex flex-col gap-5 max-sm:hidden">
           <div className="flex flex-col gap-1">

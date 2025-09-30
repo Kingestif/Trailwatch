@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./ui/landing/Navbar";
+import Footer from "./ui/landing/Footer";
 
 export const metadata: Metadata = {
   title: "Trailwatch",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body>
         <Navbar/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
