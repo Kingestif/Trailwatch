@@ -15,6 +15,8 @@ export type MoviesType = {
     poster_path: string,
     vote_average: string,
     release_date: string,
+    backdrop_path:string,
+    overview:string
 }
 
 export type SeriesType = {
