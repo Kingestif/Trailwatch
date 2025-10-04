@@ -15,3 +15,12 @@ export type MoviesType = {
     vote_average: string,
     release_date: string,
 }
+
+export type SeriesType = {
+    id: string
+    name: string,
+    overview:string,
+    poster_path: string,
+    vote_average: string,
+    first_air_date: string
+}
