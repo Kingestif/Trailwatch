@@ -66,7 +66,7 @@ export default function MovieDetail() {
               <div> {movie.genres && movie.genres.length > 0 ? movie.genres[0].name : "Unknown"}</div>•
               <div>{(movie.release_date || movie.first_air_date).split("-")[0]}</div>
             </div>
-            <div className="text-white ">
+            <div className="text-white line-clamp-3 ">
               {movie.overview}
             </div>
           </div>
