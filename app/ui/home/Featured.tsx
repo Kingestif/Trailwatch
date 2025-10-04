@@ -34,7 +34,7 @@ export default function Featured() {
       <Swiper
         slidesPerView={1}
         loop={true}
-        autoplay={{ delay: 7000 }}
+        autoplay={{ delay: 5000 }}
         modules={[Autoplay]}  
       >
         {movie.results?.slice(0,3).map((item,i)=>(
