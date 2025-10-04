@@ -29,11 +29,11 @@ export default async function Movies() {
       <div className="flex gap-5 overflow-x-auto hide-scrollbar">
         {trendingMovies.results?.map((movie:TrendingMovies)=>(
           <div key={movie.id} className="flex flex-col gap-2 font-bold">
-            <div className="w-50 h-60 rounded-lg bg-gray-500">
+            <div className="w-50 h-60">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full rounded-lg"
                 width={200}
                 height={300}
               />
