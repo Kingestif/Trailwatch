@@ -1,0 +1,47 @@
+import { MovieGallaryData } from "@/app/lib/Placeholder";
+import { SeriesType } from "@/app/lib/types";
+import Image from "next/image";
+
+export default async function Series() {
+  const res = await fetch("https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",{
+    cache:"no-store",
+    method:"GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
+    }
+  });
+  const SeriesData = await res.json();
+
+  return (
+    <div className="flex flex-col gap-5 pb-10">
+      <div className="text-3xl font-semibold">Popular Series</div>
+      <div className="grid gap-2 grid-cols-3 gap-y-5">
+        {SeriesData.results?.map((movie:SeriesType)=>(
+          <div key={movie.name} className="flex gap-2">
+            <div className="w-30 h-40">
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.name}
+                width={200}
+                height={300}
+                className="object-cover w-full h-full rounded-lg"
+              />
+            </div>
+            <div className="w-50 h-40 flex flex-col justify-between">
+              <div className="text-xl font-bold">{movie.name}</div>
+              <div className="line-clamp-3">{movie.overview}</div>
+              <div className="flex justify-between">
+                <div>{movie.first_air_date.split("-")[0]}</div>
+                <div className="flex items-center gap-1">
+                  <img src="/star.png" className="h-5 w-5" alt="Rating"/>
+                  <div>{movie.vote_average}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

@@ -1,4 +1,4 @@
-import MovieGallary from "../ui/home/MovieGallary";
+import Series from "../ui/home/Series";
 import Trending from "../ui/home/Trending";
 import Movies from "../ui/home/Movies";
 import TopBanner from "../ui/home/topBanner";
@@ -9,7 +9,7 @@ export default function page() {
       <TopBanner/>
       <Trending/>
       <Movies/>
-      <MovieGallary/>
+      <Series/>
     </div>
   )
 }
