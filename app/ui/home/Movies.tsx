@@ -31,7 +31,7 @@ export default async function Movies() {
             <div className="flex flex-col">
               <div className="text-xl">{movie.title}</div>
               <div className="flex justify-between text-gray-300">
-                <div>{movie.release_date}</div>
+                <div>{movie.release_date.split("-")[0]}</div>
                 <div className="flex items-center gap-1">
                   <img src="/star.png" className="h-5 w-5" alt="Rating"/>
                   <div>{movie.vote_average}</div>
