@@ -52,7 +52,7 @@ export default function MovieDetail() {
         <Image
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={"movie title"}
-          className="absolute inset-0 object-cover w-full h-full rounded-lg"
+          className="absolute inset-0 object-cover object-top w-full h-full rounded-lg"
           width={200}
           height={300}
         />
@@ -63,7 +63,7 @@ export default function MovieDetail() {
           <div className="flex flex-col gap-5 max-w-2xl">
             <div className="text-5xl font-semibold">{movie.name || movie.title}</div>
             <div className="flex gap-2 font-semibold items-center text-white">
-              <div>{movie.genres[0].name}</div>•
+              <div> {movie.genres && movie.genres.length > 0 ? movie.genres[0].name : "Unknown"}</div>•
               <div>{(movie.release_date || movie.first_air_date).split("-")[0]}</div>
             </div>
             <div className="text-white ">
