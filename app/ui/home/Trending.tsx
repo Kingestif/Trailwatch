@@ -32,7 +32,7 @@ export default async function Trending() {
             <div className="w-50 h-60">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
+                alt={movie.title || movie.name}
                 className="object-cover w-full h-full rounded-lg"
                 width={200}
                 height={300}
