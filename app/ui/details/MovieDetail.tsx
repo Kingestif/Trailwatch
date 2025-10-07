@@ -42,9 +42,30 @@ export default function MovieDetail() {
   },[movieId, mediaType]);
 
   if (!movie) {
-    return <div className="text-white">Loading...</div>;
+    return (
+      <div className="relative w-full h-100 overflow-hidden rounded-lg bg-gray-900">
+        {/* Background shimmer */}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#1f2937_25%,#374151_50%,#1f2937_75%)] 
+                        bg-[length:1000px_100%] animate-[shimmer_2s_infinite]" />
+
+        {/* Foreground skeleton layout */}
+        <div className="absolute bottom-10 left-10 flex flex-col gap-5">
+          <div className="h-10 w-2/3 bg-gray-700/60 rounded animate-pulse" />
+          <div className="flex gap-3 items-center">
+            <div className="h-5 w-24 bg-gray-700/60 rounded animate-pulse" />
+            <div className="h-5 w-10 bg-gray-700/60 rounded animate-pulse" />
+          </div>
+          <div className="h-20 w-3/4 bg-gray-700/60 rounded animate-pulse" />
+
+          {/* Buttons */}
+          <div className="flex gap-3 mt-5">
+            <div className="h-10 w-32 bg-gray-600/70 rounded-full animate-pulse" />
+            <div className="h-10 w-32 bg-gray-700/70 rounded-full animate-pulse" />
+          </div>
+        </div>
+      </div>
+    );
   }
-  console.log(movie)
 
   return (
     <div className="flex flex-col">

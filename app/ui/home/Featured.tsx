@@ -23,11 +23,22 @@ export default function Featured() {
     }
 
     fetchPopularMovie();
-  })
+  },[])
 
-  if(!movie){
-    return <div className="">Loading...</div>
+  if (!movie.results) {
+    return (
+      <div className="relative w-full h-100 overflow-hidden rounded-lg bg-gray-900">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 animate-[pulse_1.5s_ease-in-out_infinite]" />
+
+        <div className="absolute bottom-10 left-10 flex flex-col gap-4">
+          <div className="h-10 w-2/3 bg-gray-700/60 rounded animate-pulse" />
+          <div className="h-6 w-1/3 bg-gray-700/60 rounded animate-pulse" />
+          <div className="h-4 w-1/2 bg-gray-700/60 rounded animate-pulse" />
+        </div>
+      </div>
+    );
   }
+
 
   return (
     <div className="overflow-hidden">
