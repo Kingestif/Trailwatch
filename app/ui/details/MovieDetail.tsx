@@ -146,9 +146,19 @@ export default function MovieDetail() {
 
       {
         openTrailer &&
-        <div className="w-300 h-200 text-black  fixed left-[50%] top-[50%] translate-[-50%] z-10">
-          <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&playlist=${videoKey}`} allow="autoplay; encrypted-media" allowFullScreen ></iframe>
-        </div>
+        <>
+          <div className="fixed inset-0 bg-black/70 z-40"></div>
+
+          <div className="w-300 h-200 text-black  fixed left-[50%] top-[50%] translate-[-50%] z-50">
+            <button
+              className="absolute top-2 right-2 bg-black/70 text-white rounded-full px-3 py-1 z-50"
+              onClick={() => setOpenTrailer(false)}
+            >
+              <div className="text-xl font-bold">✕</div>
+            </button>
+            <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&playlist=${videoKey}`} allow="autoplay; encrypted-media" allowFullScreen ></iframe>
+          </div>
+        </>
       }
       
       <Recommended id={movieId} media_type={mediaType} />
