@@ -1,6 +1,6 @@
 "use client"
 
-import { CollectionType } from "@/app/lib/types";
+import { CollectionType, videoDetail } from "@/app/lib/types";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,10 +8,13 @@ import Recommended from "./Recommended";
 
 export default function MovieDetail() {
   const [movie, setMovie] = useState<CollectionType | null>(null);
+  const [videoDetail, setVideoDetail] = useState<{results:videoDetail[]}>({results:[]});
+  const [videoKey, setVideoKey] = useState("");
   const params = useParams();
   const searchParams = useSearchParams();
   const movieId = Array.isArray(params.id) ? params.id[0] : params.id;
   const mediaType = searchParams.get('type'); 
+  const [openTrailer, setOpenTrailer] = useState(false);
 
   if (!movieId || !mediaType) return <div>No movie found</div>;
 
@@ -40,6 +43,42 @@ export default function MovieDetail() {
       fetchData();
     }
   },[movieId, mediaType]);
+
+  useEffect(()=>{
+    async function fetchVideo(){
+      let url = ""
+      if(mediaType === "movie"){
+        url = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`
+      }else{
+        url = `https://api.themoviedb.org/3/tv/${movieId}/videos?language=en-US`
+      }
+      
+      const res = await fetch(url,{
+        cache:"no-store",
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+        }
+      })
+      const data = await res.json();
+  
+      setVideoDetail(data);
+
+      const trailer:videoDetail = data.results?.find(
+        (vid: videoDetail) => vid.site === "YouTube"
+      );
+
+      if(trailer){
+        setVideoKey(trailer.key)
+      } 
+
+    }
+    if (movieId && mediaType) {
+      fetchVideo();
+    }
+  },[movieId, mediaType])
+
 
   if (!movie) {
     return (
@@ -85,7 +124,7 @@ export default function MovieDetail() {
             <div className="text-5xl font-semibold">{movie.name || movie.title}</div>
             <div className="flex gap-2 font-semibold items-center text-white">
               <div> {movie.genres && movie.genres.length > 0 ? movie.genres[0].name : "Unknown"}</div>•
-              <div>{(movie.release_date || movie.first_air_date).split("-")[0]}</div>
+              <div>{(movie.release_date || movie.first_air_date || "Unknown").split("-")[0]}</div>
             </div>
             <div className="text-white line-clamp-3 ">
               {movie.overview}
@@ -93,7 +132,7 @@ export default function MovieDetail() {
           </div>
           {/* Buttons */}
           <div className="flex gap-3">
-            <button className="flex items-center bg-white text-black px-5 py-2 rounded-full gap-2 font-bold">
+            <button onClick={()=>{setOpenTrailer(true)}} className="flex items-center bg-white text-black px-5 py-2 rounded-full gap-2 font-bold">
               <svg xmlns="http://www.w3.org/2000/svg" width={30} viewBox="0 0 640 640"><path d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/></svg>
               Play
             </button>
@@ -104,6 +143,13 @@ export default function MovieDetail() {
           </div>
         </div>
       </div>
+
+      {
+        openTrailer &&
+        <div className="w-300 h-200 text-black  fixed left-[50%] top-[50%] translate-[-50%] z-10">
+          <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&playlist=${videoKey}`} allow="autoplay; encrypted-media" allowFullScreen ></iframe>
+        </div>
+      }
       
       <Recommended id={movieId} media_type={mediaType} />
     </div>

@@ -48,3 +48,11 @@ export type recommendedType = {
     id:string,
     media_type:string
 }
+
+export type videoDetail = {
+    id:string,
+    site:string,
+    type:string,
+    key:string,
+    size:string
+}
