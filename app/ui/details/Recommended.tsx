@@ -50,7 +50,7 @@ export default function Recommended({id, media_type}:recommendedType) {
                       <div className="flex flex-col">
                           <div className="text-xl">{movie.name || movie.title}</div>
                           <div className="flex justify-between text-gray-300">
-                          <div>{(movie.release_date || movie.first_air_date).split("-")[0]}</div>
+                          <div>{(movie.release_date || movie.first_air_date || "Unknown").split("-")[0]}</div>
                           <div className="flex items-center gap-1">
                               <img src="/star.png" className="h-5 w-5" alt="Rating"/>
                               <div>{movie.vote_average}</div>
