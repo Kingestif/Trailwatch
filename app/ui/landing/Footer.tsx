@@ -1,9 +1,10 @@
 import { contactData, socialLinks } from "@/app/lib/Placeholder";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="bg-[#3e3e3e] flex flex-col px-50 py-10 gap-10 max-sm:px-10 text-white">
+    <div className="bg-[#3e3e3e] flex flex-col px-50 py-10 gap-10 max-sm:px-10 text-white" id="about">
       <div className="flex justify-between">
         <div className="flex flex-col gap-5 max-sm:hidden">
           <div className="flex flex-col gap-1">
@@ -21,10 +22,16 @@ export default function Footer() {
         <div className="text-gray-300 flex flex-col gap-4 max-sm:gap-2">
           <div className="text-white text-2xl font-semibold max-sm:text-sm">About us</div>
           <div className="flex flex-col gap-3 text-lg max-sm:text-sm">
-            <div>Learn</div>
-            <div>Blog</div>
-            <div>FAQ</div>
-            <div>Help</div>
+            <Link href={"https://medium.com/@estifanos"} target="_blank">
+              <div className="AboutUs">Blog</div>
+            </Link>
+            <Link href={"https://buymeacoffee.com/estifo"} target="_blank">
+              <div className="AboutUs">Help</div>
+            </Link>
+            <Link href={"https://medium.com/@estifanos"} target="_blank">
+              <div className="AboutUs">Learn</div>
+            </Link>
+            <div className="AboutUs">FAQ</div>
           </div>
         </div>
         <div className="flex flex-col gap-2">
