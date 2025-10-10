@@ -30,7 +30,10 @@ export default function Featured() {
   },[])
 
   async function fetchDetails(movieID:string){
-    setLoading(true)
+    setLoading(true);
+    setOpenTrailer(false);
+    setNoTrailer(false);
+    
     const res = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`, {
       cache:"no-store",
       method:"GET",
@@ -42,7 +45,7 @@ export default function Featured() {
     
     const data = await res.json();
     const trailer:videoDetail = data.results.find((vid:videoDetail)=> vid.site === "YouTube")
-    if(data.results.length > 0) {
+    if(trailer && data.results.length > 0) {
       setVideoKey(trailer.key)
       setOpenTrailer(true)
     }else{
