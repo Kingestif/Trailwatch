@@ -63,14 +63,14 @@ export const testimonialData:testimonial[] = [
   },
 
   {
-    name:"Bisrat Zinabu",
+    name:"Bisrat",
     role:"Student",
     imageUrl:"/pf2.png",
     text:"The dark, cinematic design makes it feel like I’m already at the theater. It’s my go-to place to watch new releases."
   },
   
   {
-    name: "Daniel T.",
+    name: "Mike T.",
     role: "Movie Enthusiast",
     imageUrl: "/pf1.png",
     text: "I love how clean and fast the interface is. I discovered so many hidden gems I’d never seen on other platforms."
