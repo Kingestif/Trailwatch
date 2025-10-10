@@ -2,6 +2,7 @@
 import { MovieGallaryData } from "@/app/lib/Placeholder"
 import { CollectionType } from "@/app/lib/types"
 import Image from "next/image"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
@@ -35,6 +36,12 @@ export default function Navbar() {
     setSearched(true);
     setLoading(false);
   }
+
+  useEffect(()=>{
+    setFocused(false)
+    setMovie({results:[]})
+    setSearched(false);
+  },[currentPath])
 
   return (
     <div className="Navbar z-50 text-white flex justify-between text-2xl py-3 fixed w-full left-0 px-50 max-sm:text-sm max-sm:px-2 max-sm:static items-center backdrop-blur-md bg-black">
@@ -101,27 +108,29 @@ export default function Navbar() {
                   <div className="rounded-2xl h-100 w-full bg-black absolute left-1/2 top-15 translate-x-[-50%] overflow-y-auto hide-scrollbar">
                     {
                       movie.results?.map((movie:CollectionType)=>(
-                        <div key={movie.id} className="p-5 text-white flex gap-2">
-                          <div className="w-23 h-25">
-                            <Image
-                              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                              alt={movie.name || movie.title}
-                              className="object-cover w-full h-full rounded-lg"
-                              width={23}
-                              height={25}
-                            />
-                          </div>
-                          <div className="flex flex-col justify-between">
-                            <div className="flex flex-col">
-                              <div className="text-lg w-50 line-clamp-2">{movie.name || movie.title}</div>
-                              <div className="text-sm w-50">{movie.release_date || movie.first_air_date}</div>
+                        <Link key={movie.id} href={`/details/${movie.id}?type=${movie.media_type}`}>
+                          <div key={movie.id} className="p-5 text-white flex gap-2 hover:bg-blue-500/30">
+                            <div className="w-23 h-25">
+                              <Image
+                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                alt={movie.name || movie.title}
+                                className="object-cover w-full h-full rounded-lg"
+                                width={23}
+                                height={25}
+                              />
                             </div>
-                            <div className="flex items-center gap-1">
-                              <img src="/star.png" className="h-5 w-5" alt="Rating"/>
-                              <div className="text-sm">{movie.vote_average}</div>
+                            <div className="flex flex-col justify-between">
+                              <div className="flex flex-col">
+                                <div className="text-lg w-50 line-clamp-2">{movie.name || movie.title}</div>
+                                <div className="text-sm w-50">{movie.release_date || movie.first_air_date}</div>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <img src="/star.png" className="h-5 w-5" alt="Rating"/>
+                                <div className="text-sm">{movie.vote_average}</div>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       ))
                     }
                   </div>
