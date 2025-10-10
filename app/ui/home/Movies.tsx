@@ -19,7 +19,7 @@ export default async function Movies() {
       <div className="flex gap-5 overflow-x-auto hide-scrollbar">
         {TopRatedMovies.results?.map((movie:MoviesType)=>(
           <Link key={movie.id} href={`/details/${movie.id}?type=movie`}>
-            <div className="flex flex-col gap-2 font-bold">
+            <div className="flex flex-col gap-2 font-bold focus:text-yellow-400" tabIndex={0}>
               <div className="w-50 h-60 relative">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

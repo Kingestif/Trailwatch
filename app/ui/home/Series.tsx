@@ -20,7 +20,7 @@ export default async function Series() {
       <div className="grid gap-2 grid-cols-3 gap-y-5">
         {SeriesData.results?.map((movie:SeriesType)=>(
           <Link key={movie.id} href={`/details/${movie.id}?type=tv`}>
-            <div className="flex gap-2">
+            <div className="flex gap-2 focus:text-yellow-400" tabIndex={0}>
               <div className="w-30 h-40 relative">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -34,12 +34,12 @@ export default async function Series() {
               </div>
               <div className="w-50 h-40 flex flex-col justify-between">
                 <div className="text-xl font-bold">{movie.name}</div>
-                <div className="line-clamp-3">{movie.overview}</div>
+                <div className="line-clamp-3 text-white">{movie.overview}</div>
                 <div className="flex justify-between">
-                  <div>{movie.first_air_date.split("-")[0]}</div>
+                  <div className="text-white">{movie.first_air_date.split("-")[0]}</div>
                   <div className="flex items-center gap-1">
                     <img src="/star.png" className="h-5 w-5" alt="Rating"/>
-                    <div>{movie.vote_average}</div>
+                    <div className="text-white">{movie.vote_average}</div>
                   </div>
                 </div>
               </div>
