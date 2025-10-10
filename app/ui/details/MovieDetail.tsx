@@ -8,13 +8,14 @@ import Recommended from "./Recommended";
 
 export default function MovieDetail() {
   const [movie, setMovie] = useState<CollectionType | null>(null);
-  const [videoDetail, setVideoDetail] = useState<{results:videoDetail[]}>({results:[]});
   const [videoKey, setVideoKey] = useState("");
   const params = useParams();
   const searchParams = useSearchParams();
   const movieId = Array.isArray(params.id) ? params.id[0] : params.id;
   const mediaType = searchParams.get('type'); 
   const [openTrailer, setOpenTrailer] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [noVideo, setNoVideo] = useState(false);
 
   if (!movieId || !mediaType) return <div>No movie found</div>;
 
@@ -44,41 +45,42 @@ export default function MovieDetail() {
     }
   },[movieId, mediaType]);
 
-  useEffect(()=>{
-    async function fetchVideo(){
-      let url = ""
-      if(mediaType === "movie"){
-        url = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`
-      }else{
-        url = `https://api.themoviedb.org/3/tv/${movieId}/videos?language=en-US`
-      }
-      
-      const res = await fetch(url,{
-        cache:"no-store",
-        method:"GET",
-        headers: {
-          "Content-Type":"application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-        }
-      })
-      const data = await res.json();
   
-      setVideoDetail(data);
+  async function fetchVideo(){
+    setLoading(true)
+    setOpenTrailer(false)
+    setNoVideo(false)
 
-      const trailer:videoDetail = data.results?.find(
-        (vid: videoDetail) => vid.site === "YouTube"
-      );
-
-      if(trailer){
-        setVideoKey(trailer.key)
-      } 
-
+    let url = ""
+    if(mediaType === "movie"){
+      url = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`
+    }else{
+      url = `https://api.themoviedb.org/3/tv/${movieId}/videos?language=en-US`
     }
-    if (movieId && mediaType) {
-      fetchVideo();
-    }
-  },[movieId, mediaType])
+    
+    const res = await fetch(url,{
+      cache:"no-store",
+      method:"GET",
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
+      }
+    })
+    const data = await res.json();
 
+    const trailer:videoDetail = data.results?.find(
+      (vid: videoDetail) => vid.site === "YouTube"
+    );
+
+    if(trailer && data.results.length > 0) {
+      setVideoKey(trailer.key)
+      setOpenTrailer(true)
+    }else{
+      setNoVideo(true)
+    }
+    setLoading(false);
+
+  }
 
   if (!movie) {
     return (
@@ -132,7 +134,7 @@ export default function MovieDetail() {
           </div>
           {/* Buttons */}
           <div className="flex gap-3">
-            <button onClick={()=>{setOpenTrailer(true)}} className="flex items-center bg-white text-black px-5 py-2 rounded-full gap-2 font-bold">
+            <button onClick={()=>{fetchVideo()}} className="flex items-center bg-white text-black px-5 py-2 rounded-full gap-2 font-bold">
               <svg xmlns="http://www.w3.org/2000/svg" width={30} viewBox="0 0 640 640"><path d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/></svg>
               Play
             </button>
@@ -143,6 +145,19 @@ export default function MovieDetail() {
           </div>
         </div>
       </div>
+
+      {
+        loading && 
+        <div>
+          <div className="fixed inset-0 bg-black/70 z-40"></div>
+          <div className="w-100 h-50 text-black fixed left-[50%] top-[50%] translate-[-50%] z-50">
+            <svg className="animate-spin h-30 w-30  text-white" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="white" strokeWidth="4" fill="none"/>
+              <path className="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+            </svg>
+          </div>
+        </div>
+      }
 
       {
         openTrailer &&
@@ -159,6 +174,27 @@ export default function MovieDetail() {
             <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&playlist=${videoKey}`} allow="autoplay; encrypted-media" allowFullScreen ></iframe>
           </div>
         </>
+      }
+
+      {
+        noVideo && 
+        <div>
+          <div className="fixed inset-0 bg-black/70 z-40"></div>
+          <div className="w-100 h-50 text-black bg-black fixed left-[50%] top-[50%] translate-[-50%] z-50 gap-5 flex flex-col justify-center items-center">
+            <svg width="48" height="48" viewBox="0 0 24 24" className="mx-auto mb-2 text-red-500" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+              <line x1="12" y1="8" x2="12" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="12" cy="16" r="1" fill="currentColor"/>
+            </svg>
+            <div className="text-red-500">Sorry, we couldn't find a trailer for this movie.</div>
+            <button
+              className="absolute top-2 right-2 bg-black/70 text-white rounded-full px-3 py-1 z-50"
+              onClick={() => setNoVideo(false)}
+            >
+              <div className="text-xl font-bold">✕</div>
+            </button>
+          </div>
+        </div>
       }
       
       <Recommended id={movieId} media_type={mediaType} />
