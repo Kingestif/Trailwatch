@@ -31,7 +31,7 @@ export default async function Trending() {
         {trendingMovies.results?.map((movie:TrendingType)=>(
           <Link key={movie.id} href={`/details/${movie.id}?type=${movie.media_type}`}>
             <div className="flex flex-col gap-2 font-bold">
-              <div className="w-50 h-60">
+              <div className="w-50 h-60 relative">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title || movie.name}
@@ -39,6 +39,8 @@ export default async function Trending() {
                   width={200}
                   height={300}
                 />
+                <div className="hover:bg-black/30 absolute w-full h-full top-0 transition-all border-transparent hover:border hover:border-white rounded-lg duration-300"></div>
+
               </div>
               <div className="flex flex-col">
                 <div className="text-xl">{movie.title || movie.name}</div>

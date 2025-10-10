@@ -21,7 +21,7 @@ export default async function Series() {
         {SeriesData.results?.map((movie:SeriesType)=>(
           <Link key={movie.id} href={`/details/${movie.id}?type=tv`}>
             <div className="flex gap-2">
-              <div className="w-30 h-40">
+              <div className="w-30 h-40 relative">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.name}
@@ -29,6 +29,8 @@ export default async function Series() {
                   height={300}
                   className="object-cover w-full h-full rounded-lg"
                 />
+                <div className="hover:bg-black/30 absolute w-full h-full top-0 transition-all border-transparent hover:border hover:border-white rounded-lg duration-300"></div>
+
               </div>
               <div className="w-50 h-40 flex flex-col justify-between">
                 <div className="text-xl font-bold">{movie.name}</div>
