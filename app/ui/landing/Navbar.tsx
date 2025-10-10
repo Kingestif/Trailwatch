@@ -3,15 +3,17 @@ import { MovieGallaryData } from "@/app/lib/Placeholder"
 import { CollectionType } from "@/app/lib/types"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
-//!The dropdown should not display if user is not focusing on input
 export default function Navbar() {
   const currentPath = usePathname()
   const [movie,setMovie] = useState<{results:CollectionType[]}>({results:[]})
   const [value,setValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   
   async function fetchData(movieName:string) {
     setLoading(true);
@@ -40,17 +42,44 @@ export default function Navbar() {
       <div className="flex gap-10 max-sm:hidden items-center">
         <div>Home</div>
         {currentPath !== "/" &&
-          <div className="SEARCH flex bg-gray-600/50  items-center rounded-full p-2 relative">
-            <input type="text" className="w-80 h-8 text-lg p-5 focus:outline-0 " 
-              placeholder="Search"
-              value={value}
-              onChange={(e)=>{setValue(e.target.value)}}
-              // onBlur={()=>{setValue(""); setMovie({results:[]}); setSearched(false)}}
+          <div 
+            ref={containerRef}
+            className="SEARCH flex bg-gray-600/50  items-center rounded-full p-2 relative"
+            onFocus={() => setFocused(true)}
+            onBlur={(e) => {
+              if (!containerRef.current?.contains(e.relatedTarget)) {
+                setFocused(false);
+                setMovie({ results: [] });
+                setSearched(false);
+              }
+            }}
+            tabIndex={-1} 
             >
-            </input>
-            <svg className="fill-gray-50" width={30} height={30} onMouseDown={() => { fetchData(value) }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+              <input type="text" className="w-80 h-8 text-lg p-5 focus:outline-0 " 
+                ref={inputRef}
+                placeholder="Search"
+                value={value}
+                onChange={(e)=>{
+                  setValue(e.target.value);
+                  if (e.target.value === "") {
+                    setMovie({ results: [] });
+                    setSearched(false);
+                  }
+                }}
+                onKeyDown={(e) => e.key === "Enter" && fetchData(value)}
+              >
+              </input>
+            <button 
+              onMouseDown={(e) => { 
+                e.preventDefault();         
+                fetchData(value) 
+                inputRef.current?.focus()
+              }}
+              >
+              <svg className="fill-gray-50" width={30} height={30} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+            </button>
             
-            {value.trim() !== "" && 
+            {focused && value.trim() !== "" && 
               <>
                 {loading &&
                   <div className="rounded-2xl h-20 w-full bg-black absolute left-1/2 top-15 translate-x-[-50%] overflow-y-auto hide-scrollbar flex justify-center items-center">
@@ -68,7 +97,7 @@ export default function Navbar() {
                 }
     
                 
-                {movie.results.length > 0 && value !== "" && 
+                {movie.results.length > 0 && 
                   <div className="rounded-2xl h-100 w-full bg-black absolute left-1/2 top-15 translate-x-[-50%] overflow-y-auto hide-scrollbar">
                     {
                       movie.results?.map((movie:CollectionType)=>(
