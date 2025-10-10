@@ -126,8 +126,9 @@ export default function Featured() {
         loading && 
         <div>
           <div className="fixed inset-0 bg-black/70 z-40"></div>
-          <div className="w-100 h-50 text-black fixed left-[50%] top-[50%] translate-[-50%] z-50">
-            <svg className="animate-spin h-30 w-30  text-white" viewBox="0 0 24 24">
+          <div className="fixed left-1/2 top-1/2 z-50 flex items-center justify-center"
+              style={{ transform: "translate(-50%, -50%)" }}>
+            <svg className="animate-spin h-30 w-30 text-white" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="white" strokeWidth="4" fill="none"/>
               <path className="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
             </svg>
