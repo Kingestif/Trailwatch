@@ -1,32 +1,79 @@
-import { MovieGallaryData } from "@/app/lib/Placeholder";
+import { SeriesType } from "@/app/lib/types";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Series() {
+export default async function Series() {
+  let SeriesData: {results?:SeriesType[]} = {}
+  try{
+    const res = await fetch("https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",{
+      cache:"no-store",
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
+      }
+    });
+    if(!res.ok) throw new Error(`TMDB API failed with status ${res.status}`);
+    SeriesData = await res.json();
+
+  }catch(error){
+    console.error("Can't fetch series", error);
+  }
+
+  if (!SeriesData?.results?.length) {
     return (
-        <div className="flex flex-col gap-5 pb-5">
-          <div className="text-3xl font-semibold">Movies</div>
-          <div className="flex gap-5 overflow-x-auto hide-scrollbar">
-            {MovieGallaryData.map(movie=>(
-              <div key={movie.name} className="flex flex-col gap-2 font-bold">
-                <div className="w-50 h-60 rounded-lg bg-gray-500">
-                  <img
-                    src={movie.poster}
-                    alt={movie.name}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-xl">{movie.name}</div>
-                  <div className="flex justify-between text-gray-300">
-                    <div>{movie.year}</div>
-                    <div className="flex items-center gap-1">
-                      <img src="/star.png" className="h-5 w-5" alt="Rating"/>
-                      <div>{movie.rating}</div>
-                    </div>
+      <div className="flex flex-col gap-5 pb-10 animate-pulse">
+        <div className="h-8 w-40 bg-gray-300 rounded"></div>
+        <div className="grid gap-2 grid-cols-3 gap-y-5 max-sm:grid-cols-1">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="flex gap-2">
+              <div className="w-30 h-40 bg-gray-300 rounded-lg"></div>
+              <div className="w-50 h-40 flex flex-col justify-between">
+                <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 rounded w-full"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+
+  return (
+    <div className="flex flex-col gap-5 pb-10">
+      <div className="text-3xl font-semibold max-sm:text-xl">Popular Series</div>
+      <div className="grid gap-2 grid-cols-3 gap-y-5 max-sm:grid-cols-1">
+        {SeriesData.results?.slice(0,10).map((movie:SeriesType)=>(
+          <Link key={movie.id} href={`/details/${movie.id}?type=tv`}>
+            <div className="flex gap-2 focus:text-yellow-400" tabIndex={0}>
+              <div className="w-30 h-40  relative">
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.name}
+                  width={200}
+                  height={300}
+                  className="object-cover w-full h-full rounded-lg"
+                />
+                <div className="hover:bg-black/30 absolute w-full h-full top-0 transition-all border-transparent hover:border hover:border-white rounded-lg duration-300"></div>
+
+              </div>
+              <div className="w-50 h-40 flex flex-col justify-between max-sm:justify-around">
+                <div className="text-xl font-bold max-sm:text-lg">{movie.name}</div>
+                <div className="line-clamp-3 text-gray-200 max-sm:text-sm max-sm:line-clamp-2">{movie.overview}</div>
+                <div className="flex justify-between max-sm:text-sm">
+                  <div className="text-gray-200">{movie.first_air_date.split("-")[0]}</div>
+                  <div className="flex items-center gap-1">
+                    <img src="/star.png" className="h-5 w-5 max-sm:h-3 max-sm:w-3" alt="Rating"/>
+                    <div className="text-gray-200">{movie.vote_average}</div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-    )
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
 }

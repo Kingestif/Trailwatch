@@ -1,0 +1,11 @@
+import MovieDetail from "../../ui/details/MovieDetail";
+import Movies from "../../ui/home/Movies";
+
+export default function page() {
+  return (
+    <div className="bg-black text-gray-100 px-50 flex flex-col gap-10 pt-15 max-sm:px-5 max-sm:pt-5">
+      <MovieDetail/>
+      <Movies/>
+    </div>
+  )
+}
