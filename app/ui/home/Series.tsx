@@ -15,12 +15,12 @@ export default async function Series() {
 
   return (
     <div className="flex flex-col gap-5 pb-10">
-      <div className="text-3xl font-semibold">Popular Series</div>
-      <div className="grid gap-2 grid-cols-3 gap-y-5">
-        {SeriesData.results?.map((movie:SeriesType)=>(
+      <div className="text-3xl font-semibold max-sm:text-xl">Popular Series</div>
+      <div className="grid gap-2 grid-cols-3 gap-y-5 max-sm:grid-cols-1">
+        {SeriesData.results?.slice(0,10).map((movie:SeriesType)=>(
           <Link key={movie.id} href={`/details/${movie.id}?type=tv`}>
             <div className="flex gap-2 focus:text-yellow-400" tabIndex={0}>
-              <div className="w-30 h-40 relative">
+              <div className="w-30 h-40  relative">
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.name}
@@ -31,14 +31,14 @@ export default async function Series() {
                 <div className="hover:bg-black/30 absolute w-full h-full top-0 transition-all border-transparent hover:border hover:border-white rounded-lg duration-300"></div>
 
               </div>
-              <div className="w-50 h-40 flex flex-col justify-between">
-                <div className="text-xl font-bold">{movie.name}</div>
-                <div className="line-clamp-3 text-white">{movie.overview}</div>
-                <div className="flex justify-between">
-                  <div className="text-white">{movie.first_air_date.split("-")[0]}</div>
+              <div className="w-50 h-40 flex flex-col justify-between max-sm:justify-around">
+                <div className="text-xl font-bold max-sm:text-lg">{movie.name}</div>
+                <div className="line-clamp-3 text-gray-200 max-sm:text-sm max-sm:line-clamp-2">{movie.overview}</div>
+                <div className="flex justify-between max-sm:text-sm">
+                  <div className="text-gray-200">{movie.first_air_date.split("-")[0]}</div>
                   <div className="flex items-center gap-1">
-                    <img src="/star.png" className="h-5 w-5" alt="Rating"/>
-                    <div className="text-white">{movie.vote_average}</div>
+                    <img src="/star.png" className="h-5 w-5 max-sm:h-3 max-sm:w-3" alt="Rating"/>
+                    <div className="text-gray-200">{movie.vote_average}</div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,4 @@
 "use client"
-import { MovieGallaryData } from "@/app/lib/Placeholder"
 import { CollectionType } from "@/app/lib/types"
 import Image from "next/image"
 import Link from "next/link"
@@ -37,20 +36,20 @@ export default function Navbar() {
   },[currentPath])
 
   return (
-    <div className="Navbar z-50 text-white flex justify-between text-2xl py-3 fixed w-full left-0 px-50 max-sm:text-sm max-sm:px-2 max-sm:static items-center backdrop-blur-md bg-black">
+    <div className="Navbar z-50 text-white flex justify-between text-2xl py-3 fixed w-full left-0 px-50 max-sm:text-sm max-sm:px-5 max-sm:static items-center backdrop-blur-md bg-black">
       <Link href={"/"}>
         <div className="text-4xl font-semibold max-sm:text-xl text-primary duration-200">Trailwatch</div>
       </Link>
       <div className="flex gap-10 max-sm:hidden items-center">
         <Link href={"/home"}>
-          <div className="hover:text-primary duration-200">Home</div>
+          <div className="hover:text-primary active:text-primary duration-200">Home</div>
         </Link>
         <Link href={"/home"}>
-          <div className="hover:text-primary duration-200">Browse</div>
+          <div className="hover:text-primary active:text-primary duration-200">Browse</div>
         </Link>
         {currentPath === "/" && 
           <nav>
-            <a href="/#about" className="hover:text-primary duration-200">About</a>
+            <a href="/#about" className="hover:text-primary active:text-primary duration-200">About</a>
           </nav>
         }
         {currentPath !== "/" &&
@@ -149,11 +148,11 @@ export default function Navbar() {
       {
         currentPath === "/"? 
         <Link href={"/home"}>
-          <div className="bg-primary text-lg font-semibold rounded-md px-3 py-1 max-sm:text-sm max-sm:px-2 max-sm:py-1 flex items-center hover:bg-red-700 duration-200">Get Started</div>
+          <div className="bg-primary text-lg font-semibold rounded-md px-3 py-1 max-sm:text-sm max-sm:px-2 max-sm:py-1 flex items-center hover:bg-red-700 active:bg-red-700 duration-200">Get Started</div>
         </Link>
         :
-        <div className=" rounded-full bg-gray-500 p-1 max-sm:px-2 max-sm:py-1 flex items-center hover:bg-gray-600 duration-200 cursor-pointer">
-          <svg width="40" height="40" viewBox="0 0 24 24" className="text-white" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className=" rounded-full bg-gray-500 p-1 max-sm:px-1 max-sm:py-1 flex items-center hover:bg-gray-600 active:bg-gray-600 duration-200 cursor-pointer">
+          <svg width="40" height="40" viewBox="0 0 24 24" className="text-white max-sm:w-7 max-sm:h-7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2"/>
             <path d="M4 20c0-2.21 3.58-4 8-4s8 1.79 8 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
