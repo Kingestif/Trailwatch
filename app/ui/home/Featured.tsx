@@ -163,7 +163,7 @@ export default function Featured() {
               <line x1="12" y1="8" x2="12" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               <circle cx="12" cy="16" r="1" fill="currentColor"/>
             </svg>
-            <div className="text-red-500">Sorry, we couldn't find a trailer for this movie.</div>
+            <div className="text-red-500">Sorry, we couldnt find a trailer for this movie.</div>
             <button
               className="absolute top-2 right-2 bg-black/70 text-white rounded-full px-3 py-1 z-50"
               onClick={() => setNoTrailer(false)}

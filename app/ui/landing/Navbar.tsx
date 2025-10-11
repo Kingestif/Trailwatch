@@ -49,7 +49,7 @@ export default function Navbar() {
         </Link>
         {currentPath === "/" && 
           <nav>
-            <a href="/#about" className="hover:text-primary active:text-primary duration-200">About</a>
+            <Link href="/#about" className="hover:text-primary active:text-primary duration-200">About</Link>
           </nav>
         }
         {currentPath !== "/" &&

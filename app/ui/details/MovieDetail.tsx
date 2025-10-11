@@ -17,9 +17,10 @@ export default function MovieDetail() {
   const [noVideo, setNoVideo] = useState(false);
   const [save, setSave] = useState(false);
 
-  if (!movieId || !mediaType) return <div>No movie found</div>;
-
+  
   useEffect(()=>{
+    if (!movieId || !mediaType) return;
+    
     async function fetchData(){
       try{
         const res = await fetch(`/api/moviedetails?mediaType=${mediaType}&movieID=${movieId}`);
@@ -42,7 +43,7 @@ export default function MovieDetail() {
       setOpenTrailer(false)
       setNoVideo(false)
       const res = await fetch(`/api/video?mediaType=${mediaType}&movieId=${movieId}`);
-      if(!res.ok) throw new Error("Can't fetch video trailer");
+      if(!res.ok) throw new Error("Cant fetch video trailer");
       const data = await res.json();
       const trailer:videoDetail = data.results?.find(
         (vid: videoDetail) => vid.site === "YouTube"
@@ -178,7 +179,7 @@ export default function MovieDetail() {
               <line x1="12" y1="8" x2="12" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               <circle cx="12" cy="16" r="1" fill="currentColor"/>
             </svg>
-            <div className="text-red-500">Sorry, we couldn't find a trailer for this movie.</div>
+            <div className="text-red-500">Sorry, we couldnt find a trailer for this movie.</div>
             <button
               className="absolute top-2 right-2 bg-black/70 text-white rounded-full px-3 py-1 z-50"
               onClick={() => setNoVideo(false)}
@@ -189,7 +190,7 @@ export default function MovieDetail() {
         </div>
       }
       
-      <Recommended id={movieId} media_type={mediaType} />
+      <Recommended id={movieId as string} media_type={mediaType as string} />
     </div>
   )
 }

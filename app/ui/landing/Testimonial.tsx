@@ -4,7 +4,7 @@ export default function Testimonial() {
   return (
     <div className="px-50 text-gray-100 flex flex-col gap-10 py-20 max-sm:hidden">
         <div className="text-center flex flex-col gap-5">
-            <div className="text-4xl">Don't just take our word for it</div>
+            <div className="text-4xl">Dont just take our word for it</div>
             <div className="text-2xl text-gray-400">Hear what our customers have to say</div>
         </div>
         
