@@ -6,6 +6,9 @@ import Footer from "./ui/landing/Footer";
 export const metadata: Metadata = {
   title: "Trailwatch",
   description: "Watch any movie trailer",
+  icons: {
+    icon:"/cropfavi22.png"
+  }
 };
 
 export default function RootLayout({
