@@ -22,14 +22,7 @@ export default function Navbar() {
     setMovie({results:[]})
     
 
-    const res = await fetch(`https://api.themoviedb.org/3/search/multi?query=${movieName}&include_adult=false&language=en-US&page=1`, {
-      cache: "no-store",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-      }
-    });
+    const res = await fetch(`/api/search?movieName=${movieName}`);
 
     const data = await res.json();
     setMovie(data)
