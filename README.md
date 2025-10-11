@@ -14,7 +14,6 @@ Trailwatch is a modern, cinematic web app for discovering trending movies, TV se
 
 ![Landing](public/Trailwatch1.png)
 ![Home](public/Trailwatch3.png)
-![Mobile View](public/TrailwatchMobile.jpg)
 
 ## Getting Started
 
