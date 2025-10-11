@@ -3,26 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Trending() {
-  const res = await fetch("https://api.themoviedb.org/3/trending/all/day?language=en-US", {
-    cache:"no-store",
-    method:"GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
-    }
-  });
+  let trendingMovies:{results?:TrendingType[]} = {}
+  try{
+    const res = await fetch("https://api.themoviedb.org/3/trending/all/day?language=en-US", {
+      cache:"no-store",
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
+      }
+    });
+    if(!res.ok) throw new Error("Can't fetch trending films")
+    trendingMovies = await res.json()
 
-  //! Replace this with pulse suspense
-  if (!res.ok) {
+  }catch(error){
+    console.error(error);
+  }
+
+  if (!trendingMovies?.results?.length) {
     return (
-      <div className="flex flex-col gap-5">
-        <div className="text-3xl font-semibold">Trending</div>
-        <div className="text-red-500">Failed to load movies.</div>
+      <div className="flex flex-col gap-5 pb-10 animate-pulse">
+        <div className="h-8 w-40 bg-gray-300 rounded"></div>
+        <div className="flex gap-5 overflow-x-auto hide-scrollbar">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="flex flex-col gap-2 font-bold">
+              <div className="w-50 h-60 max-sm:w-40 max-sm:h-50 bg-gray-300 rounded-lg"></div>
+              <div className="flex flex-col gap-2">
+                <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
-
-  const trendingMovies = await res.json()
 
   return (
     <div className="flex flex-col gap-5 ">

@@ -3,15 +3,43 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Series() {
-  const res = await fetch("https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",{
-    cache:"no-store",
-    method:"GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
-    }
-  });
-  const SeriesData = await res.json();
+  let SeriesData: {results?:SeriesType[]} = {}
+  try{
+    const res = await fetch("https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",{
+      cache:"no-store",
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
+      }
+    });
+    if(!res.ok) throw new Error(`TMDB API failed with status ${res.status}`);
+    SeriesData = await res.json();
+
+  }catch(error){
+    console.error("Can't fetch series", error);
+  }
+
+  if (!SeriesData?.results?.length) {
+    return (
+      <div className="flex flex-col gap-5 pb-10 animate-pulse">
+        <div className="h-8 w-40 bg-gray-300 rounded"></div>
+        <div className="grid gap-2 grid-cols-3 gap-y-5 max-sm:grid-cols-1">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="flex gap-2">
+              <div className="w-30 h-40 bg-gray-300 rounded-lg"></div>
+              <div className="w-50 h-40 flex flex-col justify-between">
+                <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 rounded w-full"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col gap-5 pb-10">

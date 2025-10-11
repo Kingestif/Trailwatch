@@ -1,5 +1,4 @@
 "use client"
-
 import { CollectionType, videoDetail } from "@/app/lib/types";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
@@ -22,37 +21,44 @@ export default function MovieDetail() {
 
   useEffect(()=>{
     async function fetchData(){
-      const res = await fetch(`/api/moviedetails?mediaType=${mediaType}&movieID=${movieId}`);
-      const data = await res.json();
-      setMovie(data);
+      try{
+        const res = await fetch(`/api/moviedetails?mediaType=${mediaType}&movieID=${movieId}`);
+        if(!res.ok) throw new Error("Failed to fetch movie details");
+        const data = await res.json();
+        setMovie(data);
+
+      }catch(error){
+        console.error(error);
+      }
     }
 
-    if (movieId && mediaType) {
-      fetchData();
-    }
+    fetchData();
   },[movieId, mediaType]);
 
   
   async function fetchVideo(){
-    setLoading(true)
-    setOpenTrailer(false)
-    setNoVideo(false)
-    
-    const res = await fetch(`/api/video?mediaType=${mediaType}&movieId=${movieId}`)
-    const data = await res.json();
-
-    const trailer:videoDetail = data.results?.find(
-      (vid: videoDetail) => vid.site === "YouTube"
-    );
-
-    if(trailer && data.results.length > 0) {
-      setVideoKey(trailer.key)
-      setOpenTrailer(true)
-    }else{
-      setNoVideo(true)
+    try{
+      setLoading(true)
+      setOpenTrailer(false)
+      setNoVideo(false)
+      const res = await fetch(`/api/video?mediaType=${mediaType}&movieId=${movieId}`);
+      if(!res.ok) throw new Error("Can't fetch video trailer");
+      const data = await res.json();
+      const trailer:videoDetail = data.results?.find(
+        (vid: videoDetail) => vid.site === "YouTube"
+      );
+      if(trailer && data.results.length > 0) {
+        setVideoKey(trailer.key)
+        setOpenTrailer(true)
+      }else{
+        setNoVideo(true)
+      }
+      
+    }catch(error){
+      console.error(error)
+    }finally{
+      setLoading(false);
     }
-    setLoading(false);
-
   }
 
   if (!movie) {
