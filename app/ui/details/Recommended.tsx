@@ -31,10 +31,10 @@ export default function Recommended({id, media_type}:recommendedType) {
   if (loading) {
     return (
       <div className="flex flex-col gap-5 py-5 animate-pulse">
-        <div className="h-8 w-40 bg-gray-300 rounded"></div>
+        <div className="h-8 w-40 max-sm:w-25 bg-gray-300 rounded"></div>
         <div className="flex gap-5 overflow-x-auto hide-scrollbar">
-          {Array.from({ length: 7 }).map((_, i) => (
-            <div key={i} className="flex flex-col gap-2 w-50 h-60 max-sm:w-40 max-sm:h-50 bg-gray-700 rounded-lg"></div>
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="flex flex-col gap-2 w-50 h-60 max-sm:w-20 max-sm:h-30 bg-gray-700 rounded-lg"></div>
           ))}
         </div>
       </div>
