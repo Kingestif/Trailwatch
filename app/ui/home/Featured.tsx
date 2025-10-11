@@ -13,9 +13,18 @@ export default function Featured() {
   const [noTrailer, setNoTrailer] = useState(false);
 
   async function fetchPopularMovie(){
-    const res = await fetch("api/featured")
-    const data = await res.json();
-    setMovie(data);
+    try{
+      const res = await fetch("api/featured");
+      if(!res.ok) throw new Error("Failed to fetch featured movies");
+
+      const data = await res.json();
+      if (!data?.results) throw new Error("Invalid data format");
+      setMovie(data);
+
+    }catch(error){
+      console.error(error);
+      setMovie({results:[]})
+    }
   }
 
   useEffect(()=>{
@@ -23,20 +32,29 @@ export default function Featured() {
   },[])
 
   async function fetchDetails(movieID:string){
-    setLoading(true);
-    setOpenTrailer(false);
-    setNoTrailer(false);
-    
-    const res = await fetch(`/api/details?movieID=${movieID}`)
-    const data = await res.json();
-    const trailer:videoDetail = data.results.find((vid:videoDetail)=> vid.site === "YouTube")
-    if(trailer && data.results.length > 0) {
-      setVideoKey(trailer.key)
-      setOpenTrailer(true)
-    }else{
-      setNoTrailer(true)
+    try{
+      setLoading(true);
+      setOpenTrailer(false);
+      setNoTrailer(false);
+
+      const res = await fetch(`/api/details?movieID=${movieID}`);
+      if(!res.ok) throw new Error("Failed to fetch details");
+
+      const data = await res.json();
+      const trailer:videoDetail = data.results.find((vid:videoDetail)=> vid.site === "YouTube")
+
+      if(trailer && data.results.length > 0) {
+        setVideoKey(trailer.key)
+        setOpenTrailer(true)
+      }else{
+        setNoTrailer(true)
+      }
+      
+    }catch(error){
+      console.error(error);
+    }finally{
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   if (movie.results.length < 1) {
