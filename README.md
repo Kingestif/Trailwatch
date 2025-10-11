@@ -2,6 +2,10 @@
 
 Trailwatch is a modern, cinematic web app for discovering trending movies, TV series, and trailers. Built with Next.js, React, and Tailwind CSS, it delivers a fast, intuitive experience with personalized recommendations, ratings, and more.
 
+## Live Demo
+
+Check out the deployed app here: [trailwatch](https://trailwatch-mu.vercel.app/)
+
 ## Features
 
 - 🎬 **Trending & Popular**: Browse the latest movies and TV series.
