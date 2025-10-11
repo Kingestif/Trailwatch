@@ -22,21 +22,7 @@ export default function MovieDetail() {
 
   useEffect(()=>{
     async function fetchData(){
-      let url = ""
-      if(mediaType === "movie"){
-        url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`
-      }else{
-        url = `https://api.themoviedb.org/3/tv/${movieId}?language=en-US`
-      }
-
-      const res = await fetch(url,{
-        cache:"no-store",
-        method:"GET",
-        headers: {
-          "Content-Type":"application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-        }
-      })
+      const res = await fetch(`/api/moviedetails?mediaType=${mediaType}&movieID=${movieId}`);
       const data = await res.json();
       setMovie(data);
     }
@@ -51,22 +37,8 @@ export default function MovieDetail() {
     setLoading(true)
     setOpenTrailer(false)
     setNoVideo(false)
-
-    let url = ""
-    if(mediaType === "movie"){
-      url = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`
-    }else{
-      url = `https://api.themoviedb.org/3/tv/${movieId}/videos?language=en-US`
-    }
     
-    const res = await fetch(url,{
-      cache:"no-store",
-      method:"GET",
-      headers: {
-        "Content-Type":"application/json",
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-      }
-    })
+    const res = await fetch(`/api/video?mediaType=${mediaType}&movieId=${movieId}`)
     const data = await res.json();
 
     const trailer:videoDetail = data.results?.find(

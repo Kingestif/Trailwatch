@@ -12,20 +12,13 @@ export default function Featured() {
   const [loading, setLoading] = useState(false);
   const [noTrailer, setNoTrailer] = useState(false);
 
-  useEffect(()=> {
-    async function fetchPopularMovie(){
-      const res = await fetch("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1", {
-        cache:"no-store",
-        method:"GET",
-        headers:{
-          "Content-Type":"application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-        }
-      })
-      const data = await res.json();
-      setMovie(data);
-    }
+  async function fetchPopularMovie(){
+    const res = await fetch("api/featured")
+    const data = await res.json();
+    setMovie(data);
+  }
 
+  useEffect(()=>{
     fetchPopularMovie();
   },[])
 
@@ -34,15 +27,7 @@ export default function Featured() {
     setOpenTrailer(false);
     setNoTrailer(false);
     
-    const res = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`, {
-      cache:"no-store",
-      method:"GET",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":`Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-      }
-    })
-    
+    const res = await fetch(`/api/details?movieID=${movieID}`)
     const data = await res.json();
     const trailer:videoDetail = data.results.find((vid:videoDetail)=> vid.site === "YouTube")
     if(trailer && data.results.length > 0) {
@@ -111,7 +96,7 @@ export default function Featured() {
                     <svg xmlns="http://www.w3.org/2000/svg" width={30} viewBox="0 0 640 640"><path d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/></svg>
                     Play
                   </button>
-                  <button className="flex items-center justify-center text-4xl border-1 px-3 rounded-2xl active:bg-white duration-200 active:text-gray-500">+</button>
+                  <button className="flex items-center justify-center text-4xl border-1 px-3 rounded-2xl active:bg-white duration-200 active:text-gray-500 cursor-pointer">+</button>
                 </div>
               </div>
             </div>

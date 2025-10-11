@@ -11,21 +11,8 @@ export default function Recommended({id, media_type}:recommendedType) {
   useEffect(()=>{
     async function fetchData(){
       setLoading(true);
-      let url = ""
-      if(media_type === "movie"){
-        url = `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`
-      }else{
-        url = `https://api.themoviedb.org/3/tv/${id}/recommendations?language=en-US&page=1`
-      }
-
-      const res = await fetch(url,{
-        cache:"no-store",
-        method:"GET",
-        headers: {
-          "Content-Type":"application/json",
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-        }
-      })
+    
+      const res = await fetch(`/api/recommended?mediaType=${media_type}&id=${id}`);
       const data = await res.json();
       setMovie(data);
       setLoading(false);
@@ -34,7 +21,7 @@ export default function Recommended({id, media_type}:recommendedType) {
     fetchData();
   },[id, media_type]);
 
-  if (movie.results.length < 1) {
+  if (!movie || !Array.isArray(movie.results) || movie.results.length < 1) {
     return null;
   }
 
