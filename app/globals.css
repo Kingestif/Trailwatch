@@ -34,3 +34,7 @@ html{
   color: white;
   cursor: pointer;
 }
+
+.AboutUs:active{
+  color:white;
+}
