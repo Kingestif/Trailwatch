@@ -3,15 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Movies() {
-  const res = await fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", {
-    cache: "no-store",
-    method:"GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
-    }
-  })
-  const TopRatedMovies = await res.json();
+  let TopRatedMovies: { results?: MoviesType[] } = {};
+
+  try{
+    const res = await fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", {
+      cache: "no-store",
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.TMDB_API_KEY}`
+      }
+    })
+
+    if(!res.ok) throw new Error(`TMDB API failed with status ${res.status}`);
+    TopRatedMovies = await res.json();
+
+  }catch(error){
+    console.error("Error fetbhing top rated movies", error);
+  }
+
+  if (!TopRatedMovies?.results?.length) {
+    return (
+      <div className="flex flex-col gap-5 pb-5">
+        <div className="text-3xl font-semibold max-sm:text-xl">Movies</div>
+        <div className="flex gap-5 overflow-x-auto hide-scrollbar">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="flex flex-col gap-2 animate-pulse">
+              <div className="w-50 h-60 max-sm:w-40 max-sm:h-50 bg-gray-800 rounded-lg" />
+              <div className="h-5 w-40 bg-gray-800 rounded" />
+              <div className="h-4 w-20 bg-gray-800 rounded" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-5 pb-5">
