@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trailwatch
+
+Trailwatch is a modern, cinematic web app for discovering trending movies, TV series, and trailers. Built with Next.js, React, and Tailwind CSS, it delivers a fast, intuitive experience with personalized recommendations, ratings, and more.
+
+## Features
+
+- 🎬 **Trending & Popular**: Browse the latest movies and TV series.
+- 🔍 **Search**: Instantly find any movie or show with ratings, cast, and trailers.
+- ⭐ **Recommendations**: Get personalized suggestions tailored to your taste.
+- 🚀 **Fast & Responsive**: Optimized for all devices with a sleek, dark UI.
+- 🛠️ **Tech Stack**: Next.js 15, React 19, Tailwind CSS 4
+
+## Screenshots
+
+![Landing](public/Trailwatch1.png)
+![Home](public/Trailwatch3.png)
+![Mobile View](public/TrailwatchMobile.jpg)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 18+
+- pnpm (recommended)
+
+### Installation
+
+```sh
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env` file in the root directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+TMDB_API_KEY=your_tmdb_api_key
+```
 
-## Learn More
+### Development
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+pnpm build
+```
 
-## Deploy on Vercel
+### Start
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+pnpm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Folder Structure
+
+```
+app/
+	api/           # API routes
+	home/          # Home page components
+	ui/            # UI components
+	lib/           # Shared types and placeholder data
+public/          # Static assets
+```
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first.
+
+## License
+
+MIT
+
+---
+
+Made with 🤍 in Ethiopia.  
+[GitHub](https://github.com/Kingestif) | [Medium](https://medium.com/@estifanos) | [LinkedIn](https://www.linkedin.com/in/estif/)
